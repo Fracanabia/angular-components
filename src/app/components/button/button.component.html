@@ -1,0 +1,8 @@
+<button [disabled]="disabled" [class]="color">
+  <ng-content select="[icon]"></ng-content>
+  <ng-content select="[icon-left]"></ng-content>
+  <span>
+    <ng-content></ng-content>
+  </span>
+  <ng-content select="[icon-right]"></ng-content>
+</button>

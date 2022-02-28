@@ -1,10 +1,50 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomeModule),
+  },
+  {
+    path: 'button-test',
+    loadChildren: () =>
+      import('./pages/button-test/button-test.module').then(
+        (m) => m.ButtonTestModule
+      ),
+  },
+  {
+    path: 'table-test',
+    loadChildren: () =>
+      import('./pages/table-test/table-test.module').then(
+        (m) => m.TableTestModule
+      ),
+  },
+  {
+    path: 'rxjs-observable',
+    loadChildren: () =>
+      import('./pages/rxjs-observable/rxjs-observable.module').then(
+        (m) => m.RxjsObservableModule
+      ),
+  },
+  {
+    path: 'clean-arch-boundaries-interactor',
+    loadChildren: () =>
+      import(
+        './pages/clean-arch-boundaries-interactor/clean-arch-boundaries-interactor.module'
+      ).then((m) => m.CleanArchBoundariesInteractorModule),
+  },
+  { path: 'calendar', loadChildren: () => import('./pages/calendar/calendar.module').then(m => m.CalendarModule) },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

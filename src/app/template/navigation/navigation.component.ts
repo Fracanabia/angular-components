@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { routes } from './app-routing.module';
+import { routes } from 'src/app/app-routing.module';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class NavigationComponent implements OnInit {
   routes: string[] = [];
 
   constructor() {}

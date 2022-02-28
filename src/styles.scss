@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@import "variables";
 
 html,
 body {
@@ -6,5 +6,90 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #e5e5e5;
-  overflow: auto;
+}
+
+* {
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.white {
+  color: $black;
+  background: $white;
+}
+
+.black {
+  color: $white;
+  background: $black;
+}
+
+.primary {
+  background: $primary;
+  color: $white;
+}
+
+.secondary {
+  background: $secondary;
+  color: $white;
+}
+
+.default {
+  background: $default;
+  color: $white;
+}
+
+.warning {
+  background: $warning;
+  color: $white;
+}
+
+.danger {
+  background: $danger;
+  color: $white;
+}
+
+.success {
+  background: $success;
+  color: $white;
+}
+
+.flex {
+  display: flex;
+  &-center {
+    align-items: center;
+    justify-content: center;
+  }
+  &-wrap {
+    flex-wrap: wrap;
+  }
+  &-nowrap {
+    flex-wrap: nowrap;
+  }
+}
+
+.m- {
+  @for $i from 1 to 10 {
+    $i: $i * 4;
+    &#{$i} {
+      margin: #{$i}px;
+    }
+  }
+}
+
+.p- {
+  @for $i from 1 to 10 {
+    $i: $i * 4;
+    &#{$i} {
+      padding: #{$i}px;
+    }
+  }
+}
+
+.w- {
+  @for $i from 1 to 10 {
+    $i: $i * 10;
+    &#{$i} {
+      width: #{$i}#{"%"};
+    }
+  }
 }

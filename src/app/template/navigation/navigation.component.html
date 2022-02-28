@@ -1,0 +1,13 @@
+<div class="navigation">
+  <div class="header">
+    <span>COMPONENTS</span>
+  </div>
+  <div class="menu">
+    <ul>
+      <li *ngFor="let route of routes" [routerLink]="[route]">{{route}}</li>
+    </ul>
+  </div>
+  <div class="footer">
+    v.0.0.0
+  </div>
+</div>

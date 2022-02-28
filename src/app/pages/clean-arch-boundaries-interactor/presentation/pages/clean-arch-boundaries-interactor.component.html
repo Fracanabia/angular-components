@@ -1,0 +1,10 @@
+<pre class="white">Users: {{ users | json }}</pre>
+
+
+
+<h2>Selecionar usuário</h2>
+<button *ngFor="let user of users" (click)="listUserId(user.id)">
+  <span>{{user.name}}</span>
+</button>
+
+<pre class="white">User: {{ user | json }}</pre>

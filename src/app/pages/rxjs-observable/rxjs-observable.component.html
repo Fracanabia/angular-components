@@ -1,0 +1,4 @@
+<h1>RXJS - Observale</h1>
+
+<h2 *ngIf="!configs.length">Carregando lista</h2>
+<app-list *ngIf="configs.length" [configs]="configs"></app-list>

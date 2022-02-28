@@ -1,0 +1,56 @@
+@import "variables";
+
+$h-header: 70px;
+$h-footer: 30px;
+$spacing: 8px;
+$h-scroll: calc($h-header + $h-footer);
+
+.navigation {
+  box-shadow: 0px 0px 5px 5px #00000010;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: $w-navigation;
+  .header {
+    align-items: center;
+    background-color: $background-red;
+    display: flex;
+    height: $h-header;
+    justify-content: center;
+    padding: $spacing;
+    span {
+      font-size: 1.6rem;
+    }
+  }
+  .menu {
+    height: calc(100% - $h-scroll);
+    margin: $spacing 0;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        cursor: pointer;
+        overflow-x: hidden;
+        padding: $spacing;
+        text-overflow: ellipsis;
+        text-transform: capitalize;
+        &:hover {
+          background: $default;
+        }
+      }
+    }
+  }
+  .footer {
+    align-items: center;
+    background: $background-red;
+    display: flex;
+    height: $h-footer;
+    justify-content: center;
+    padding: $spacing;
+  }
+}
