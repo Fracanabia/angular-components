@@ -1,0 +1,36 @@
+<div [formGroup]="formGroup">
+  <div formArrayName="entities">
+
+    <ng-container *ngFor="let item of entitiesForm.controls; let isFirst = first; let i = index" [formGroupName]="i">
+      <ng-container *ngIf="item.value.tpSinalVital === 'R'; else notGrouped">
+
+        <ng-container *ngIf="isFirst">
+          <ng-container *ngFor="let number of numbers; let next = index">
+            <span>{{entitiesForm.value[number].dsSiglaSinalVital}}/
+              <strong>{{entitiesForm.value[number].tpSinalVital}}</strong>
+            </span>
+          </ng-container>
+
+          <ng-container *ngFor="let number of numbers; let next = index">
+            <input type="text" [formControlName]="number">
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+
+      <ng-template #notGrouped>
+        <div style="display: flex;">
+          <div>{{item.value.dsSinalVital}}: </div>
+          <strong>{{item.value.tpSinalVital}}</strong>
+          <input type="text" [formControlName]="i">
+        </div>
+      </ng-template>
+
+    </ng-container>
+
+    <button (click)="test()">Teste</button>
+
+
+
+  </div>
+</div>

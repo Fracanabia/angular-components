@@ -1,6 +1,6 @@
 @import "variables";
 
 .content {
-  min-width: calc(100% - $w-navigation);
+  width: calc(100% - $w-navigation);
   overflow: auto;
 }

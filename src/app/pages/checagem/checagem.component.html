@@ -1,0 +1,53 @@
+<section style="padding: 8px;">
+
+  <div style="display: flex; flex-direction: column;" *ngFor="let grouped of headerGrouped; let first = first">
+
+    <div style="display: flex;">
+      <div [style.margin]="first ? '2px' : '2px 0'"
+        style="background: #ff000036; width: 40%; display: flex; align-items: center; overflow: hidden; text-overflow: ellipsis;">
+        #{{grouped.cdPrescricaoMedica}} - {{grouped.dsPrescritoPor}} - {{grouped.dsPeriodo}}
+      </div>
+      <div *ngIf="first"
+        style="margin: 2px; background: #ff000036; width: 60%; display: flex; align-items: center; justify-content: space-around;">
+        <div style="display: flex; align-items: center;">#</div>
+        <div style="display: flex; align-items: center;" *ngFor="let hour of headerNavigation.slice(0,8)">
+          {{hour | date: 'hh:mm'}}
+        </div>
+        <div style="display: flex; align-items: center;">#</div>
+      </div>
+    </div>
+
+    <ng-container *ngFor="let checagens of mtxChecagemRendererBean">
+      <div style="display: flex;" *ngIf="checagens[0].cdPrescricaoMedica === grouped.cdPrescricaoMedica">
+        <div style="margin: 2px; background: #ff000036; width: 40%; display: flex;">
+          <div style="display: flex; flex-direction: column; flex: 1;">
+            <div style="display: flex; align-items: center;" [innerHTML]="checagens[0].dsPrincipal"></div>
+            <mat-divider></mat-divider>
+            <div style="display: flex; align-items: center; justify-content: center;">Detalhes</div>
+            <mat-divider></mat-divider>
+            <div style="display: flex; flex-direction: column;">
+              <strong style="display: flex; align-items: center;">Observação</strong>
+              <div style="display: flex; align-items: center;" *ngFor="let componente of checagens[0].lsComponente">
+                {{componente.descricao}}
+              </div>
+              <strong style="display: flex; align-items: center;">Componentes</strong>
+              <div style="display: flex; align-items: center;" *ngFor="let componente of checagens[0].lsComponente">
+                {{componente.descricao}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style="margin: 2px; background: #ff000036; width: 60%; display: flex; align-items: center; justify-content: space-around;">
+          <div style="display: flex; align-items: center;">#</div>
+          <div style="display: flex; align-items: center;" *ngFor="let checagem of checagens.slice(0,8);">
+            {{checagem.dsHeader}}
+          </div>
+          <div style="display: flex; align-items: center;">#</div>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+
+</section>

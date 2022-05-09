@@ -41,6 +41,9 @@ export const routes: Routes = [
       ).then((m) => m.CleanArchBoundariesInteractorModule),
   },
   { path: 'calendar', loadChildren: () => import('./pages/calendar/calendar.module').then(m => m.CalendarModule) },
+  { path: 'mat-calendar-test', loadChildren: () => import('./pages/mat-calendar-test/mat-calendar-test.module').then(m => m.MatCalendarTestModule) },
+  { path: 'checagem', loadChildren: () => import('./pages/checagem/checagem.module').then(m => m.ChecagemModule) },
+  { path: 'reactive-form-grouped', loadChildren: () => import('./pages/reactive-form-grouped/reactive-form-grouped.module').then(m => m.ReactiveFormGroupedModule) },
 ];
 
 @NgModule({
