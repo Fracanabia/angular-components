@@ -1,0 +1,45 @@
+* {
+  font-family: arial;
+  white-space: normal;
+}
+
+.container {
+  background: #3f51b5;
+
+  /* give the outermost container a predefined size */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 600px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  margin: 10px;
+  background: #2196f3;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  /* for Firefox */
+  min-height: 0;
+}
+
+.content {
+  margin: 10px;
+  background: #bbdefb;
+}
+
+.scrollable-content {
+  background: white;
+  flex-grow: 1;
+
+  overflow: auto;
+
+  /* for Firefox */
+  min-height: 0;
+}

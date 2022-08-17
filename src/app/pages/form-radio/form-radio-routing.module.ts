@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChecagemComponent } from './checagem.component';
+import { FormRadioComponent } from './form-radio.component';
 
-const routes: Routes = [{ path: '', component: ChecagemComponent }];
+const routes: Routes = [{ path: '', component: FormRadioComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ChecagemRoutingModule { }
+export class FormRadioRoutingModule { }

@@ -1,0 +1,36 @@
+.bg-w {
+  background: white;
+}
+
+.p {
+  &-8 {
+    padding: 8px;
+  }
+  &y {
+    &-8 {
+      padding: 8px 0;
+    }
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+.scroll {
+  overflow: auto;
+  flex: 1;
+}

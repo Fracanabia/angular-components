@@ -1,0 +1,7 @@
+<ng-container [formGroup]="formGroup">
+  <select formControlName="select">
+    <option [ngValue]="">Selecione</option>
+    <option [ngValue]="item" *ngFor="let item of items">{{item.title}}</option>
+  </select>
+
+</ng-container>

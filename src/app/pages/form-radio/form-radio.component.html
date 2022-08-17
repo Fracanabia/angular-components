@@ -1,0 +1,72 @@
+<section [formGroup]="formGroup">
+  <mat-radio-group formControlName="option">
+    <div fxLayout="row" fxLayoutAlign="start center">
+
+      <mat-radio-button fxFlex="100px" value="frequency">
+        Frequencia
+      </mat-radio-button>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose an option</mat-label>
+        <mat-select formControlName="frequency">
+          <mat-option value="option1">Option 1</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+
+      <mat-radio-button fxFlex="100px" value="date">
+        Data
+      </mat-radio-button>
+
+      <div fxLayout="column">
+
+        <div fxLayout="row" fxLayoutGap="5px">
+          <mat-form-field appearance="fill">
+            <mat-label>Data</mat-label>
+            <input formControlName="dateInitial" matInput [matDatepicker]="dp1"
+              [disabled]="formGroup.value.option !== 'date'">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+            <mat-datepicker #dp1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Hora</mat-label>
+            <input formControlName="hourInitial" matInput type="number">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Minuto</mat-label>
+            <input formControlName="minuteInitial" matInput type="number">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="5px">
+          <mat-form-field appearance="fill">
+            <mat-label>Data</mat-label>
+            <input formControlName="dateFinal" matInput [matDatepicker]="dp1"
+              [disabled]="formGroup.value.option !== 'date'">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+            <mat-datepicker #dp1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Hora</mat-label>
+            <input formControlName="hourFinal" matInput type="number">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Minuto</mat-label>
+            <input formControlName="minuteFinal" matInput type="number">
+          </mat-form-field>
+        </div>
+
+      </div>
+
+    </div>
+  </mat-radio-group>
+</section>

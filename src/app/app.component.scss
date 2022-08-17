@@ -3,4 +3,5 @@
 .content {
   width: calc(100% - $w-navigation);
   overflow: auto;
+  height: 100vh;
 }

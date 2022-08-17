@@ -1,0 +1,9 @@
+<div>
+  <input type="number" step="0.01" oninput="value = !!value && Math.abs(value) >= 0 ? Math.abs(value) : null">
+</div>
+<div>
+  <input type="text" oninput="value=value.replace('-','').replace(',', '.').replace(/^([^0-9]*)$/, '')">
+</div>
+<div>
+  <input type="number" step="0.01" number oninput="value = validity.valid && value.replace(',', '.') || (value='');">
+</div>

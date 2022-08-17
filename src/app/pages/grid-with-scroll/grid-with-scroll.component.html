@@ -1,0 +1,60 @@
+<div class="relative" fxFlexFill>
+
+  <!-- CONTAINER -->
+  <div class="absolute" fxLayout="row" fxLayoutGap="5px">
+
+    <!-- LEFT -->
+    <div fxLayout="column" fxLayoutGap="5px">
+
+      <!-- TITULO -->
+      <div>Titulo</div>
+
+      <div fxLayout="column" style="flex: 1; min-height: 0;">
+        <!-- FILTERS -->
+        <div class="bg-w p-8" fxLayout="row wrap" fxLayoutGap="5px">
+          <div fxLayout="column" fxLayoutGap="5px" *ngFor="let _ of [].constructor(10)">
+            <span>Label</span>
+            <input type="text">
+          </div>
+        </div>
+        <!-- SEARCH -->
+        <div class="py-8" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            <span>Label</span>
+            <select fxFlex="300px">
+              <option value=""></option>
+              <option value="" *ngFor="let _ of [].constructor(10)">Item</option>
+            </select>
+          </div>
+          <button>Botão</button>
+        </div>
+        <!-- ITEMS -->
+        <div class="scroll" fxLayout="column" fxLayoutGap="5px">
+          <div class="bg-w p-8" *ngFor="let _ of [].constructor(30)">Item</div>
+          <div>
+            <button>Botão</button>
+          </div>
+        </div>
+        <!-- OPTIONS -->
+        <div class="py-8" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+          <button *ngFor="let _ of [].constructor(10)">Botão</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div fxLayout="column" fxLayoutGap="5px">
+      <div class="bg-w scroll">
+        <div class="bg-w sticky">Tratamentos</div>
+        <div *ngFor="let _ of [].constructor(2)">Item</div>
+      </div>
+      <div class="bg-w scroll">
+        <div class="bg-w sticky"> Ciclos
+        </div>
+        <div *ngFor="let _ of [].constructor(30)">Item</div>
+      </div>
+    </div>
+
+  </div>
+</div>

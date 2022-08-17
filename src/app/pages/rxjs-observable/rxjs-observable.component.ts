@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { delay, Subject, takeUntil } from 'rxjs';
-import { InitialConfigStoreService } from './data/initial-config-store.service';
-import { InitialConfigService } from './data/initial-config.service';
-import { InitialConfig } from './model/initial-config';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {delay, Subject, takeUntil} from 'rxjs';
+import {InitialConfigStoreService} from './data/initial-config-store.service';
+import {InitialConfigService} from './data/initial-config.service';
+import {InitialConfig} from './model/initial-config';
 
 @Component({
   selector: 'app-rxjs-observable',
