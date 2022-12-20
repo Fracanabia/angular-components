@@ -1,21 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { routes } from './app-routing.module';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  routes: string[] = [];
+export class AppComponent {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.getRoutes();
-  }
-
-  getRoutes() {
-    routes.forEach((route) => route.path && this.routes.push(route.path));
-  }
 }

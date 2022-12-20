@@ -1,0 +1,21 @@
+<div style="min-width: 800px;" [formGroup]="formGroup">
+  <div style="padding: 4px; margin-bottom: 4px; position: relative; background: #ffffff;">
+    <input style="border: none; width: 100%; height: 24px; outline: none; padding: 0; margin: 0;" [type]="passwordType"
+      formControlName="password" placeholder="Informe sua senha">
+    <button
+      style="border: none; outline: none; cursor: pointer; background: transparent; position: absolute; right: 0; top: 0; bottom: 0;"
+      (click)="passwordType = passwordType === 'password' ? 'text' : 'password'"
+      [innerText]="passwordType === 'password' ? 'Show' : 'Hide'"></button>
+  </div>
+  <div style="padding: 4px; margin-bottom: 4px; position: relative; background: #ffffff;">
+    <input style="border: none; width: 100%; height: 24px; outline: none; padding: 0; margin: 0;"
+      [type]="passwordConfirmType" formControlName="password_confirm" placeholder="Confirme sua senha">
+    <button
+      style="border: none; outline: none; cursor: pointer; background: transparent; position: absolute; right: 0; top: 0; bottom: 0;"
+      (click)="passwordConfirmType = passwordConfirmType === 'password' ? 'text' : 'password'"
+      [innerText]="passwordConfirmType === 'password' ? 'Show' : 'Hide'"></button>
+  </div>
+  <span *ngIf="formGroup.get('password_confirm')?.hasError('mismatch')">
+    As senhas estão diferentes.
+  </span>
+</div>

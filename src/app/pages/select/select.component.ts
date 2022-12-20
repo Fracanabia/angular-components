@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject, delay } from 'rxjs';
 
 @Component({
   selector: 'app-select',
@@ -7,6 +8,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
+
+  private _fakeItemList = new BehaviorSubject([
+    {id: 1, title: 'um'},
+    {id: 2, title: 'dois'},
+    {id: 3, title: 'tres'},
+  ])
+
+  private _fakeItemSelected = new BehaviorSubject(
+    {id: 3, title: 'tres'},
+  )
 
   public items:any[] = []
 
@@ -18,25 +29,21 @@ export class SelectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.items = [
-      {id: 1, title: 'um'},
-      {id: 2, title: 'dois'},
-      {id: 3, title: 'tres'},
-    ]
-    
     this.formGroup = this._formBuilder.group({
       select: ['', Validators.required]
     })
 
-    if(this.items.length)
-    this.formGroup.get('select')?.setValue(this.items[0])
+    this._fakeItemList.pipe(delay(1500)).subscribe({
+      next: (items) => this.items = items
+    });
+
+    this._fakeItemSelected.pipe(delay(1500)).subscribe({
+      next: (item) => this.formGroup.get('select')?.setValue(item)
+    })
+
   }
 
-
-  test2(items1:any, items2:any){
-    return  items1.id === items2.id
+  compareFn(item1:any, item2:any){
+    return item1?.id === item2?.id
   }
-
-
-
 }

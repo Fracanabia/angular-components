@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="items">
+    <ul>
+      <li><strong>Players</strong></li>
+      <li *ngFor="let p of players">{{ p.first_name }} {{ p.last_name }}</li>
+    </ul>
+    <ul>
+      <li><strong>Teams</strong></li>
+      <li *ngFor="let t of teams">{{ t.city }} {{ t.conference }}</li>
+    </ul>
+    <ul>
+      <li><strong>Photos</strong></li>
+      <li *ngFor="let p of photos">{{ p.title }}</li>
+    </ul>
+  </div>
+  <div class="buttons">
+    <button (click)="loadPLayers()">Load Players</button>
+    <button (click)="loadTeams()">Load Teams</button>
+    <button (click)="loadPhotos()">Load Photos</button>
+  </div>
+  <!-- subscription to loading observable -->
+  <div class="loading" *ngIf="loading$ | async">
+    <h1>Please wait...</h1>
+  </div>
+</div>

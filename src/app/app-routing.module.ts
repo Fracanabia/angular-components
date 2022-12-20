@@ -12,6 +12,8 @@ export const routes: Routes = [
  { path: 'input-number', loadChildren: () => import('./pages/input-number/input-number.module').then(m => m.InputNumberModule) },
  { path: 'grid-with-scroll', loadChildren: () => import('./pages/grid-with-scroll/grid-with-scroll.module').then(m => m.GridWithScrollModule) },
  { path: 'scroll-with-flex', loadChildren: () => import('./pages/scroll-with-flex/scroll-with-flex.module').then(m => m.ScrollWithFlexModule) },
+ { path: 'input-compare', loadChildren: () => import('./pages/input-compare/input-compare.module').then(m => m.InputCompareModule) },
+ { path: 'http-interceptors', loadChildren: () => import('./pages/http-interceptors/http-interceptors.module').then(m => m.HttpInterceptorsModule) },
 ];
 
 @NgModule({

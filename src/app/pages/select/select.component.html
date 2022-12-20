@@ -1,7 +1,6 @@
 <ng-container [formGroup]="formGroup">
-  <select formControlName="select">
-    <option [ngValue]="">Selecione</option>
+  <select formControlName="select" [compareWith]="compareFn">
+    <option value="">Selecione</option>
     <option [ngValue]="item" *ngFor="let item of items">{{item.title}}</option>
   </select>
-
 </ng-container>
