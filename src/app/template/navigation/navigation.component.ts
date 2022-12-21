@@ -7,7 +7,9 @@ import { routes } from 'src/app/app-routing.module';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
-  routes: string[] = [];
+  public routes: string[] = [];
+
+  public search = '';
 
   constructor() {}
 

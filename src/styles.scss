@@ -65,6 +65,20 @@ body {
   &-nowrap {
     flex-wrap: nowrap;
   }
+  &-direction {
+    &-column {
+      flex-direction: column;
+    }
+  }
+}
+
+.gap- {
+  @for $i from 1 to 10 {
+    $i: $i * 4;
+    &#{$i} {
+      gap: #{$i}px;
+    }
+  }
 }
 
 .m- {

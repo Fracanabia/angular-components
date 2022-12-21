@@ -1,8 +1,8 @@
 @import "variables";
 
-:host{
-  margin: 8px;
-  
+:host {
+  margin: 0 2px;
+
   button {
     align-items: center;
     border-radius: 4px;
@@ -12,17 +12,17 @@
     display: flex;
     justify-content: space-between;
     padding: 8px;
-    font-size: .8rem;
+    font-size: 0.8rem;
     font-weight: 600;
     min-height: 40px;
-    
+
     &:hover {
       opacity: 0.8;
     }
 
     &:disabled {
       pointer-events: none;
-      opacity: .3;
+      opacity: 0.3;
     }
 
     & > {

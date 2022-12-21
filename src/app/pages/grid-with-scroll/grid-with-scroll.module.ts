@@ -1,8 +1,9 @@
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {GridWithScrollRoutingModule} from './grid-with-scroll-routing.module';
-import {GridWithScrollComponent} from './grid-with-scroll.component';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ButtonModule } from './../../components/button/button.module';
+import { GridWithScrollRoutingModule } from './grid-with-scroll-routing.module';
+import { GridWithScrollComponent } from './grid-with-scroll.component';
 
 
 
@@ -13,7 +14,8 @@ import {GridWithScrollComponent} from './grid-with-scroll.component';
   imports: [
     CommonModule,
     GridWithScrollRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ButtonModule
   ]
 })
 export class GridWithScrollModule { }

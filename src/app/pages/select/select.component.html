@@ -1,6 +1,9 @@
 <ng-container [formGroup]="formGroup">
-  <select formControlName="select" [compareWith]="compareFn">
-    <option value="">Selecione</option>
-    <option [ngValue]="item" *ngFor="let item of items">{{item.title}}</option>
-  </select>
+  <div style="padding: 4px; margin-bottom: 4px; position: relative; background: #ffffff;">
+    <select style="border: none; width: 100%; height: 24px; outline: none; padding: 0; margin: 0;"
+      formControlName="select" [compareWith]="compareFn">
+      <option value="">Selecione</option>
+      <option [ngValue]="item" *ngFor="let item of items">{{item.title}}</option>
+    </select>
+  </div>
 </ng-container>

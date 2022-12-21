@@ -1,10 +1,11 @@
 <pre class="white">Users: {{ users | json }}</pre>
 
-
-
 <h2>Selecionar usuário</h2>
-<button *ngFor="let user of users" (click)="listUserId(user.id)">
-  <span>{{user.name}}</span>
-</button>
+
+<div class="flex">
+  <app-button color="secondary" *ngFor="let user of users" (click)="listUserId(user.id)">
+    <span>{{user.name}}</span>
+  </app-button>
+</div>
 
 <pre class="white">User: {{ user | json }}</pre>

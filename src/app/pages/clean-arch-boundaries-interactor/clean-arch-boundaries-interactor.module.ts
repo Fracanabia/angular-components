@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ButtonModule } from 'src/app/components/button/button.module';
 import { CleanArchBoundariesInteractorRoutingModule } from './clean-arch-boundaries-interactor-routing.module';
 import { UserAdapterService } from './data/user.adapter.service';
 import { UserRepositoryService } from './data/user.repository.service';
@@ -11,7 +12,11 @@ import { UserPresenterService } from './presentation/presenters/user.presenter.s
 
 @NgModule({
   declarations: [CleanArchBoundariesInteractorComponent],
-  imports: [CommonModule, CleanArchBoundariesInteractorRoutingModule],
+  imports: [
+    CommonModule,
+    CleanArchBoundariesInteractorRoutingModule,
+    ButtonModule
+  ],
   providers: [
     UserRepositoryService,
     UserAdapterService,

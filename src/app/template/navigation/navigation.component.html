@@ -1,10 +1,17 @@
 <div class="navigation">
-  <div class="header">
+  <div class="header flex-direction-column gap-4">
     <span>COMPONENTS</span>
+    <div style="width: 100%; padding: 4px; margin-bottom: 4px; position: relative; background: #ffffff;">
+      <input style="border: none; width: 100%; height: 24px; outline: none; padding: 0; margin: 0;" type="search"
+        autocomplete="off" [(ngModel)]="search" placeholder="Pesquisar">
+    </div>
   </div>
+
   <div class="menu">
     <ul>
-      <li *ngFor="let route of routes" routerLinkActive="active-link" [routerLink]="[route]">{{route}}</li>
+      <li *ngFor="let route of routes | filterString: search" routerLinkActive="active-link" [routerLink]="[route]">
+        {{route}}
+      </li>
     </ul>
   </div>
   <div class="footer">

@@ -26,18 +26,18 @@
               <option value="" *ngFor="let _ of [].constructor(10)">Item</option>
             </select>
           </div>
-          <button>Botão</button>
+          <app-button color="secondary">Botão</app-button>
         </div>
         <!-- ITEMS -->
         <div class="scroll" fxLayout="column" fxLayoutGap="5px">
           <div class="bg-w p-8" *ngFor="let _ of [].constructor(30)">Item</div>
           <div>
-            <button>Botão</button>
+            <app-button color="secondary">Botão</app-button>
           </div>
         </div>
         <!-- OPTIONS -->
         <div class="py-8" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-          <button *ngFor="let _ of [].constructor(10)">Botão</button>
+          <app-button color="secondary" *ngFor="let _ of [].constructor(10)">Botão</app-button>
         </div>
       </div>
 
