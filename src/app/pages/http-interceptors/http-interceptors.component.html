@@ -14,9 +14,9 @@
     </ul>
   </div>
   <div class="buttons">
-    <button (click)="loadPLayers()">Load Players</button>
-    <button (click)="loadTeams()">Load Teams</button>
-    <button (click)="loadPhotos()">Load Photos</button>
+    <app-button color="secondary" (click)="loadPLayers()">Load Players</app-button>
+    <app-button color="secondary" (click)="loadTeams()">Load Teams</app-button>
+    <app-button color="secondary" (click)="loadPhotos()">Load Photos</app-button>
   </div>
   <!-- subscription to loading observable -->
   <div class="loading" *ngIf="loading$ | async">

@@ -4,7 +4,7 @@
   </div>
   <div class="menu">
     <ul>
-      <li *ngFor="let route of routes" [routerLink]="[route]">{{route}}</li>
+      <li *ngFor="let route of routes" routerLinkActive="active-link" [routerLink]="[route]">{{route}}</li>
     </ul>
   </div>
   <div class="footer">

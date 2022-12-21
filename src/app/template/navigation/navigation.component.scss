@@ -42,6 +42,9 @@ $h-scroll: calc($h-header + $h-footer);
         &:hover {
           background: $default;
         }
+        &.active-link {
+          background: $active-link;
+        }
       }
     }
   }
