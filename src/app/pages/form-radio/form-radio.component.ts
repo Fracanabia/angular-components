@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-radio',
@@ -16,7 +16,7 @@ export class FormRadioComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this._formBuilder.group({
       option: 'date',
-      frequency: '',
+      frequency: [{value:'', disabled: true}],
       dateInitial: '',
       hourInitial: '',
       minuteInitial: '',
