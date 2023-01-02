@@ -2,5 +2,8 @@
   "cSpell.words": [
     "interactor",
     "Interactor"
-  ]
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

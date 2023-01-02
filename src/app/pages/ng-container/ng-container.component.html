@@ -1,0 +1,26 @@
+<ng-container *ngTemplateOutlet="calc">
+</ng-container>
+
+<ng-template #calc>
+  <p> A soma é: {{sum()}} e a multiplicação é {{multiply()}} </p>
+</ng-template>
+
+
+<ng-container *ngTemplateOutlet="tmpl; context: {$implicit: 'Render Text with implicit'}">
+</ng-container>
+
+<ng-template #tmpl let-context>
+  <p>{{context}}</p>
+  <pre>{{context}}</pre>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="eng; context: {$implicit: {name: 'Render Object with implicit'}}"></ng-container>
+<ng-template #eng let-context>
+  <p>{{context.name}}</p>
+  <pre>{{context | json}}</pre>
+</ng-template>
+
+
+<ng-template #empty>
+  Empty
+</ng-template>
