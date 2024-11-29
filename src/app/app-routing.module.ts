@@ -12,6 +12,7 @@ export const routes: Routes = [
  { path: 'http-interceptors', loadChildren: () => import('./pages/http-interceptors/http-interceptors.module').then(m => m.HttpInterceptorsModule) },
  { path: 'input-compare', loadChildren: () => import('./pages/input-compare/input-compare.module').then(m => m.InputCompareModule) },
  { path: 'input-number', loadChildren: () => import('./pages/input-number/input-number.module').then(m => m.InputNumberModule) },
+ { path: 'number-currency', loadChildren: () => import('./pages/number-currency/number-currency.module').then(m => m.NumberCurrencyModule) },
  { path: 'ng-container', loadChildren: () => import('./pages/ng-container/ng-container.module').then(m => m.NgContainerModule) },
  { path: 'rxjs-observable',loadChildren: () => import('./pages/rxjs-observable/rxjs-observable.module').then((m) => m.RxjsObservableModule ) },
  { path: 'scroll-with-flex', loadChildren: () => import('./pages/scroll-with-flex/scroll-with-flex.module').then(m => m.ScrollWithFlexModule) },

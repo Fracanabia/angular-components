@@ -106,3 +106,9 @@ body {
     }
   }
 }
+
+.number-spin::-webkit-outer-spin-button,
+.number-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
