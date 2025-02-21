@@ -17,6 +17,9 @@ export const routes: Routes = [
  { path: 'rxjs-observable',loadChildren: () => import('./pages/rxjs-observable/rxjs-observable.module').then((m) => m.RxjsObservableModule ) },
  { path: 'scroll-with-flex', loadChildren: () => import('./pages/scroll-with-flex/scroll-with-flex.module').then(m => m.ScrollWithFlexModule) },
  { path: 'select', loadChildren: () => import('./pages/select/select.module').then(m => m.SelectModule) },
+ { path: 'inpatient-list', loadChildren: () => import('./pages/inpatient-list/inpatient-list.module').then(m => m.InpatientListModule) },
+ { path: 'record', loadChildren: () => import('./pages/record/record.module').then(m => m.RecordModule) },
+ { path: 'native-record', loadChildren: () => import('./pages/native-record/native-record.module').then(m => m.NativeRecordModule) },
 ];
 
 @NgModule({

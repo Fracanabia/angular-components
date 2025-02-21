@@ -1,0 +1,8 @@
+<ng-container *ngFor="let a of audios">
+  <div *ngIf="a">
+    <audio controls [src]="a"></audio>
+  </div>
+</ng-container>
+
+<button (click)="startRecording()" [disabled]="recording">Iniciar Gravação</button>
+<button (click)="stopRecording()" [disabled]="!recording">Parar Gravação</button>
