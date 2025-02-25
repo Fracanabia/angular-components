@@ -18,25 +18,30 @@ export class NativeRecordComponent implements OnInit {
   }
 
   private _setupResultHandler() {
+    let silenceTimeout: ReturnType<typeof setTimeout>;
+
     this.nativeRecordService.onResult((event: any) => {
+      clearTimeout(silenceTimeout);
+
       const { results, resultIndex } = event;
       let recognized = '';
-
 
       for (let i = resultIndex; i < results.length; ++i) {
 
       if (results[i].isFinal) {
         recognized += (results[i][0].transcript as string).toLowerCase().trim();
-        console.log('final => ', recognized)
-      } else {
-        console.log('interimResults => ',results[i][0].transcript)
       }
+
+      silenceTimeout = setTimeout(() => {
+        console.log("Nenhum áudio recebido por 10 segundos. Considerando fim da fala.");
+    }, 10000);
     }
     });
   }
 
   private _setupErrorHandler(): void {
-    this.nativeRecordService.onEnd(() => {
+    this.nativeRecordService.onEnd((event) => {
+      console.log(event)
       this.startRecognition();
     });
   }

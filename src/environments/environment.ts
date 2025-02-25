@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  iaKey: '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'
 };
 
 /*

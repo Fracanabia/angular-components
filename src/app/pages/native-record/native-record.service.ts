@@ -18,8 +18,8 @@ export class NativeRecordService {
   constructor(@Inject(LOCALE_ID) private readonly _localeId: string, private readonly _ngZone: NgZone) {
     if (recognition) {
        this.recognition = recognition;
-      this.recognition.continuous = true;
-      this.recognition.interimResults = true;
+      // this.recognition.continuous = true;
+      // this.recognition.interimResults = true;
       this.recognition.lang = 'pt-BR';
     } else {
       console.error('Este navegador não suporta a API de Reconhecimento de Fala');

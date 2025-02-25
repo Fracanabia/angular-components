@@ -1,0 +1,20 @@
+<div class="chat-container">
+  <h2>Chat com IA</h2>
+
+  <!-- Área do chat -->
+  <div class="chat-box">
+    <div *ngFor="let message of messages" [ngClass]="{'user': message.role === 'user', 'assistant': message.role === 'assistant'}">
+      <strong>{{ message.role === 'user' ? 'Você' : 'IA' }}:</strong>
+      <p>{{ message.content }}</p>
+    </div>
+  </div>
+
+  <!-- Input para enviar mensagens -->
+  <div class="input-container">
+    <input type="text" [(ngModel)]="userInput" placeholder="Digite sua mensagem..." (keyup.enter)="enviarMensagem()" />
+    <button (click)="enviarMensagem()" [disabled]="carregando">Enviar</button>
+  </div>
+
+  <!-- Estado de carregamento -->
+  <p *ngIf="carregando" class="loading">Carregando resposta...</p>
+</div>

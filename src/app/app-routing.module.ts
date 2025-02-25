@@ -20,6 +20,7 @@ export const routes: Routes = [
  { path: 'inpatient-list', loadChildren: () => import('./pages/inpatient-list/inpatient-list.module').then(m => m.InpatientListModule) },
  { path: 'record', loadChildren: () => import('./pages/record/record.module').then(m => m.RecordModule) },
  { path: 'native-record', loadChildren: () => import('./pages/native-record/native-record.module').then(m => m.NativeRecordModule) },
+ { path: 'ia', loadChildren: () => import('./pages/ia/ia.module').then(m => m.IaModule) },
 ];
 
 @NgModule({
