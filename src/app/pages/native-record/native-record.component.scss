@@ -1,0 +1,17 @@
+.blinking-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+button {
+  padding: 8px 15px;
+  border: none;
+
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+}

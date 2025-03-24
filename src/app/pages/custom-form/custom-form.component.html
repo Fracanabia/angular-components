@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+  <div *ngFor="let field of schema.fields">
+    <app-custom-form-inputs [field]="field" [formGroup]="form"></app-custom-form-inputs>
+  </div>
+</form>
+
+<pre>{{ form.value | json }}</pre>
+

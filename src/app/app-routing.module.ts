@@ -21,6 +21,9 @@ export const routes: Routes = [
  { path: 'record', loadChildren: () => import('./pages/record/record.module').then(m => m.RecordModule) },
  { path: 'native-record', loadChildren: () => import('./pages/native-record/native-record.module').then(m => m.NativeRecordModule) },
  { path: 'ia', loadChildren: () => import('./pages/ia/ia.module').then(m => m.IaModule) },
+ { path: 'custom-form', loadChildren: () => import('./pages/custom-form/custom-form.module').then(m => m.CustomFormModule) },
+ { path: 'create-fields', loadChildren: () => import('./pages/create-fields/create-fields.module').then(m => m.CreateFieldsModule) },
+ { path: 'mavi', loadChildren: () => import('./pages/mavi/mavi.module').then(m => m.MaviModule) },
 ];
 
 @NgModule({

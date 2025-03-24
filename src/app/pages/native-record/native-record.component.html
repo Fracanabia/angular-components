@@ -1,4 +1,16 @@
 <div>
-  <button (click)="startRecognition()">Iniciar Reconhecimento</button>
-  <button (click)="stopRecognition()">Parar Reconhecimento</button>
+  <i style="margin: 12px 0">
+    <span>
+      {{ recognizedText }}
+    </span>
+    <span style="color: gray"
+      >{{ recognizingText }}
+      <span *ngIf="recognizingText" class="blinking-cursor">|</span>
+    </span>
+  </i>
+  <div style="display: flex; gap: 8px; justify-content: flex-end">
+    <button (click)="startRecognition()">🎤</button>
+    <button (click)="stopRecognition()">⏹️</button>
+    <button (click)="clearRecognizedText()">🧹</button>
+  </div>
 </div>

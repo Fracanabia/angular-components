@@ -1,0 +1,56 @@
+<form [formGroup]="formGroup" *ngIf="isFieldVisible(field)">
+
+  <div *ngIf="field.type === 'text'" style="margin-bottom: 8px; display: flex; flex-direction: column">
+    <label [for]="field.name">{{ field.label }}</label>
+    <input [placeholder]="field.label" [id]="field.name" [formControlName]="field.name" [type]="field.type || 'text'" />
+    <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+  </div>
+
+  <div *ngIf="field.type === 'number'" style="margin-bottom: 8px; display: flex; flex-direction: column">
+    <label [for]="field.name">{{ field.label }}</label>
+    <input [placeholder]="field.label" [id]="field.name" [formControlName]="field.name" [type]="field.type || 'number'" />
+    <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+  </div>
+
+  <div *ngIf="field.type === 'checkbox'" style="margin-bottom: 8px; display: flex; align-items: center">
+    <input [id]="field.name" [formControlName]="field.name" type="checkbox" style="margin-right: 8px" />
+    <label [for]="field.name">{{ field.label }}</label>
+    <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+  </div>
+
+  <div *ngIf="field.type === 'select'" style="margin-bottom: 8px; display: flex; flex-direction: column">
+    <label [for]="field.name">{{ field.label }}</label>
+    <select [id]="field.name" [formControlName]="field.name">
+      <option value="" disabled selected hidden>Selecione uma opção</option>
+      <option *ngFor="let option of field.options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+    <ng-container *ngTemplateOutlet="errorTemplate"></ng-container>
+  </div>
+
+  <div *ngIf="field.type === 'radio'" style="margin-bottom: 8px; display: flex; flex-direction: column">
+    <label>{{ field.label }}</label>
+    <div *ngFor="let option of field.options">
+      <input type="radio" [formControlName]="field.name" [value]="option.value" />
+      {{ option.label }}
+    </div>
+  </div>
+
+  <ng-template #errorTemplate>
+    <div *ngIf="formGroup.get(field.name)?.invalid" style="color: red">
+      Este campo é obrigatório.
+    </div>
+  </ng-template>
+
+  <!-- Se o campo for do tipo "json" -->
+  <fieldset style="border: 1px solid" *ngIf="field.type === 'json'">
+    <legend>{{ field.label }}</legend>
+    <app-custom-form-json [field]="field" [formGroup]="formGroup"></app-custom-form-json>
+  </fieldset>
+
+  <!-- Se o campo for do tipo "array" -->
+  <ng-container *ngIf="field.type === 'array'">
+    <app-custom-form-array [field]="field" [formGroup]="formGroup"></app-custom-form-array>
+  </ng-container>
+</form>

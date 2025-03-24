@@ -8,6 +8,7 @@ import { NativeRecordRoutingModule } from './native-record.routing.module';
     CommonModule,
     NativeRecordRoutingModule
   ],
-  declarations: [NativeRecordComponent]
+  declarations: [NativeRecordComponent],
+  exports: [NativeRecordComponent]
 })
 export class NativeRecordModule { }

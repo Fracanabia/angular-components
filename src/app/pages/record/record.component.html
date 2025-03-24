@@ -1,8 +1,13 @@
 <ng-container *ngFor="let a of audios">
-  <div *ngIf="a">
-    <audio controls [src]="a"></audio>
-  </div>
+  <audio controls>
+    <source [src]="a" type="audio/wav" />
+    Your browser does not support the audio element.
+  </audio>
 </ng-container>
 
-<button (click)="startRecording()" [disabled]="recording">Iniciar Gravação</button>
-<button (click)="stopRecording()" [disabled]="!recording">Parar Gravação</button>
+<button (click)="startRecording()" [disabled]="recording">
+  Iniciar Gravação
+</button>
+<button (click)="stopRecording()" [disabled]="!recording">
+  Parar Gravação
+</button>

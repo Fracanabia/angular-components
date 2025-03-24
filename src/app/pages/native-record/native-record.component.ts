@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, NgZone, OnInit, Output } from '@angular/core';
 import { NativeRecordService } from './native-record.service';
 
 @Component({
@@ -7,10 +7,16 @@ import { NativeRecordService } from './native-record.service';
   styleUrls: ['./native-record.component.scss'],
 })
 export class NativeRecordComponent implements OnInit {
-  transcribedText = '';
-  selectedLanguage = 'pt-BR';
+  public recognizedText: string = ''; // Texto confirmado
 
-  constructor(private nativeRecordService: NativeRecordService) {}
+  public recognizingText: string = ''; // Texto em tempo real (não finalizado)
+
+  @Output() public recognizedTextEmitter = new EventEmitter<string>();
+
+  constructor(
+    private readonly _nativeRecordService: NativeRecordService,
+    private readonly _ngZone: NgZone
+  ) {}
 
   ngOnInit() {
     this._setupResultHandler();
@@ -20,38 +26,54 @@ export class NativeRecordComponent implements OnInit {
   private _setupResultHandler() {
     let silenceTimeout: ReturnType<typeof setTimeout>;
 
-    this.nativeRecordService.onResult((event: any) => {
+    this._nativeRecordService.onResult((event: any) => {
       clearTimeout(silenceTimeout);
 
       const { results, resultIndex } = event;
-      let recognized = '';
+
+      let temporaryRecognizing = '';
 
       for (let i = resultIndex; i < results.length; ++i) {
+        const transcript = results[i][0].transcript.toLowerCase().trim();
 
-      if (results[i].isFinal) {
-        recognized += (results[i][0].transcript as string).toLowerCase().trim();
+        if (results[i].isFinal) {
+          // Se for finalizado, move para recognizedText e limpa recognizingText
+          this.recognizedText += transcript + ' ';
+          this.recognizingText = '';
+        } else {
+          // Se ainda estiver sendo reconhecido, atualiza recognizingText
+          temporaryRecognizing = transcript;
+        }
       }
 
+      // Atualiza recognizingText com a última transcrição parcial
+      this.recognizingText = temporaryRecognizing;
+      this.recognizedTextEmitter.emit(this.recognizedText);
+
+      // Define timeout para detectar silêncio e encerrar o reconhecimento
       silenceTimeout = setTimeout(() => {
         console.log("Nenhum áudio recebido por 10 segundos. Considerando fim da fala.");
-    }, 10000);
-    }
+      }, 10000);
     });
   }
 
   private _setupErrorHandler(): void {
-    this.nativeRecordService.onEnd((event) => {
-      console.log(event)
+    this._nativeRecordService.onEnd((event) => {
+      console.log(event);
       this.startRecognition();
     });
   }
 
   public startRecognition() {
-    this.nativeRecordService.startRecognition();
+    this._nativeRecordService.startRecognition();
   }
 
   public stopRecognition() {
-    this.nativeRecordService.stopRecognition();
+    this._nativeRecordService.stopRecognition();
+  }
 
+  public clearRecognizedText() {
+    this.recognizedText = '';
+    this.recognizedTextEmitter.emit(this.recognizedText);
   }
 }

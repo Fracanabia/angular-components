@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  iaKey: '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'
+  iaKey: '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'
 };
 
 /*

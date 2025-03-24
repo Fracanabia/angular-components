@@ -1,0 +1,4 @@
+<button [style.backgroundColor]="(stateSpeech$ | async) === true ? 'green' : ''" (click)="start()">Iniciar speech</button>
+<button [style.backgroundColor]="(stateSpeech$ | async) === false ? 'red' : ''" (click)="stop()">Parar speech</button>
+
+<pre>stateSpeech: {{stateSpeech$ | async}}</pre>

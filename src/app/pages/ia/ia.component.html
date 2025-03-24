@@ -1,20 +1,163 @@
 <div class="chat-container">
-  <h2>Chat com IA</h2>
+  <div class="chat">
+    <h2>Chat com IA</h2>
 
-  <!-- Área do chat -->
-  <div class="chat-box">
-    <div *ngFor="let message of messages" [ngClass]="{'user': message.role === 'user', 'assistant': message.role === 'assistant'}">
-      <strong>{{ message.role === 'user' ? 'Você' : 'IA' }}:</strong>
-      <p>{{ message.content }}</p>
+    <!-- Área do chat -->
+    <div class="chat-box">
+      <div
+        *ngFor="let message of messages"
+        [ngClass]="{
+          user: message.role === 'user',
+          assistant: message.role === 'assistant'
+        }"
+      >
+        <strong>{{ message.role === "user" ? "Você" : "IA" }}:</strong>
+        <p>{{ message.content }}</p>
+      </div>
     </div>
   </div>
 
-  <!-- Input para enviar mensagens -->
-  <div class="input-container">
-    <input type="text" [(ngModel)]="userInput" placeholder="Digite sua mensagem..." (keyup.enter)="enviarMensagem()" />
-    <button (click)="enviarMensagem()" [disabled]="carregando">Enviar</button>
+  <div class="forms">
+    <h2>Transcrição com IA</h2>
+
+    <div class="trasncription">
+      <form [formGroup]="formulario" *ngIf="schema">
+        <div *ngFor="let key of getSchemaKeys()">
+          <ng-container *ngIf="isArray(schema[key]); else isNotArray">
+            <!-- 🔹 Caso seja um Array -->
+            <div [formArrayName]="key">
+              <div
+                *ngFor="
+                  let groupControl of getFormArrayControls(key);
+                  let i = index
+                "
+                [formGroupName]="i"
+                style="
+                  background: #e9e9e9;
+                  padding: 10px;
+                  border-radius: 4px;
+                  margin-bottom: 8px;
+                "
+              >
+                <div
+                  *ngFor="let field of schema[key][i]?.fields"
+                  style="display: flex; flex-direction: column"
+                >
+                  <!-- 🔹 Exibe o campo apenas se a dependência for atendida -->
+                  <ng-container *ngIf="shouldShowField(key, i, field)">
+                    <label>{{ field.label }}</label>
+
+                    <ng-container *ngIf="field.type === 'text'">
+                      <input [formControlName]="field.name" type="text" />
+                    </ng-container>
+
+                    <ng-container *ngIf="field.type === 'select'">
+                      <select [formControlName]="field.name">
+                        <option
+                          *ngFor="let option of field.options"
+                          [value]="option"
+                        >
+                          {{ option }}
+                        </option>
+                      </select>
+                    </ng-container>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #isNotArray>
+            <ng-container *ngIf="isObject(schema[key]); else isPrimitive">
+              <!-- 🔹 Caso seja um Objeto -->
+              <div
+                [formGroupName]="key"
+                style="
+                  background: #e9e9e9;
+                  padding: 10px;
+                  border-radius: 4px;
+                  margin-bottom: 8px;
+                  display: flex;
+                  flex-direction: column;
+                "
+              >
+                <label>{{ schema[key]?.label }}</label>
+                <ng-container *ngIf="schema[key]?.type === 'text'">
+                  <input [formControlName]="schema[key]?.name" type="text"
+                /></ng-container>
+                <ng-container *ngIf="schema[key]?.type === 'select'">
+                  <select [formControlName]="schema[key]?.name">
+                    <option
+                      *ngFor="let option of schema[key]?.options"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </option>
+                  </select></ng-container
+                >
+              </div>
+            </ng-container>
+
+            <ng-template #isPrimitive>
+              <!-- 🔹 Caso seja um valor simples -->
+              <div
+                style="
+                  background: #e9e9e9;
+                  padding: 10px;
+                  border-radius: 4px;
+                  margin-bottom: 8px;
+                  display: flex;
+                  flex-direction: column;
+                "
+              >
+                <label>{{ key }}</label>
+                <ng-container *ngIf="schema[key]?.type === 'text'">
+                  <input [formControlName]="schema[key]?.name" type="text"
+                /></ng-container>
+                <ng-container *ngIf="schema[key]?.type === 'select'">
+                  <select [formControlName]="schema[key]?.name">
+                    <option
+                      *ngFor="let option of schema[key]?.options"
+                      [value]="option"
+                    >
+                      {{ option }}
+                    </option>
+                  </select></ng-container
+                >
+              </div>
+            </ng-template>
+          </ng-template>
+        </div>
+
+        <button [disabled]="carregando">Inserir</button>
+      </form>
+
+      <pre>debug: {{ formulario.value | json }}</pre>
+    </div>
+  </div>
+
+  <div class="text-voice">
+    <h2>Transcrição com voz IA</h2>
+
+    <div class="trasncription">
+      <app-native-record
+        (recognizedTextEmitter)="userInput = $event"
+      ></app-native-record>
+      <!-- Input para enviar mensagens -->
+      <div class="input-container">
+        <input
+          type="text"
+          [(ngModel)]="userInput"
+          placeholder="Digite sua mensagem..."
+          (keyup.enter)="enviarMensagem()"
+        />
+        <button (click)="enviarMensagem()" [disabled]="carregando">
+          Enviar
+        </button>
+      </div>
+      <p *ngIf="carregando" class="loading">Carregando resposta...</p>
+    </div>
   </div>
 
   <!-- Estado de carregamento -->
-  <p *ngIf="carregando" class="loading">Carregando resposta...</p>
 </div>
