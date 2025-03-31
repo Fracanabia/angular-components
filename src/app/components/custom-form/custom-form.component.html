@@ -1,0 +1,23 @@
+<div style="display: flex; gap: 8px; height: 100%;">
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+    <div style="overflow: hidden; display: flex; flex-direction: column;">
+      <div style="flex: 1; overflow: auto; background: #e9e9e9; padding: 8px;">
+        <form [formGroup]="formGroup">
+          <div *ngFor="let field of schema.fields">
+            <app-custom-form-inputs [field]="field" [formGroup]="formGroup" [rootFormGroup]="formGroup" [isRecursive]="isRecursive"></app-custom-form-inputs>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Debugg -->
+  <div *ngIf="debug" style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+      <div style="overflow: hidden; display: flex; flex-direction: column; gap: 8px;">
+        <pre *ngIf="!isRecursive" style="flex: 1; margin: 0; overflow: auto; background: #e9e9e9; padding: 8px; font-size: 10px;">schema: {{ schema | json }}</pre>
+        <pre style="flex: 1; margin: 0; overflow: auto; background: #e9e9e9; padding: 8px; font-size: 10px;">formGroup: {{ formGroup.value | json }}</pre>
+        <pre style="flex: 1; margin: 0; overflow: auto; background: #e9e9e9; padding: 8px; font-size: 10px;">formGroup sanitizeObject: {{ sanitizeObject(formGroup.value) | json }}</pre>
+      </div>
+  </div>
+</div>
+

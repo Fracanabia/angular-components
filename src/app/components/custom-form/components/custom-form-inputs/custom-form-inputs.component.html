@@ -51,6 +51,6 @@
 
   <!-- Se o campo for do tipo "array" -->
   <ng-container *ngIf="field.type === 'array'">
-    <app-custom-form-array [field]="field" [formGroup]="formGroup"></app-custom-form-array>
+    <app-custom-form-array [field]="field" [formGroup]="formGroup" [isRecursive]="isRecursive"></app-custom-form-array>
   </ng-container>
 </form>

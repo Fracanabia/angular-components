@@ -1,40 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { schemaFormFields } from './base';
+import { FormSchema } from '../custom-form.component';
 
-export interface FormSchema {
-  title: string;
-  fields: FormField[];
-}
-
-export interface FormField {
-  name: string;
-  label: string;
-  type: 'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'json' | 'array';
-  options?: { label: string; value: any }[];
-  fields?: FormField[];
-  validations?: {
-    readonly?: boolean;
-    required?: boolean;
-    min?: number;
-    max?: number;
-    email?: boolean;
-    pattern?: string;
-  };
-  conditional?: {
-    field: string;
-    value: any;
-    operator?: '===' | '!==' | '>' | '<' | '>=' | '<=';
-  };
-  value?: any;
-}
-
-const complexSchema: FormSchema = {
+export const complexSchema: FormSchema = {
   title: 'Cadastro Multi-Nível',
   fields: [
     {
@@ -116,7 +82,7 @@ const complexSchema: FormSchema = {
   ],
 };
 
-const advancedSchema: FormSchema = {
+export const advancedSchema: FormSchema = {
   title: 'Cadastro Avançado',
   fields: [
     {
@@ -374,7 +340,7 @@ const advancedSchema: FormSchema = {
   ],
 };
 
-const errorSchema: FormSchema = {
+export const errorSchema: FormSchema = {
   title: '',
   fields: [
     {
@@ -401,59 +367,58 @@ const errorSchema: FormSchema = {
           ],
           validations: { required: true },
         },
-
-        {
-          name: 'additionalInfo',
-          label: 'Informações Adicionais',
-          type: 'json',
-          fields: [
-            {
-              name: 'job',
-              label: 'Trabalho',
-              type: 'json',
-              fields: [
-                {
-                  name: 'company',
-                  label: 'Empresa',
-                  type: 'text',
-                },
-                {
-                  name: 'position',
-                  label: 'Cargo',
-                  type: 'text',
-                },
-              ],
-            },
-            {
-              name: 'hobbies',
-              label: 'Hobbies',
-              type: 'array',
-              fields: [
-                {
-                  name: 'hobby',
-                  label: 'Hobby',
-                  type: 'text',
-                },
-                {
-                  name: 'frequency',
-                  label: 'Frequência',
-                  type: 'select',
-                  options: [
-                    { label: 'Diário', value: 'daily' },
-                    { label: 'Semanal', value: 'weekly' },
-                    { label: 'Mensal', value: 'monthly' },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
+        // {
+        //   name: 'additionalInfo',
+        //   label: 'Informações Adicionais',
+        //   type: 'json',
+        //   fields: [
+        //     {
+        //       name: 'job',
+        //       label: 'Trabalho',
+        //       type: 'json',
+        //       fields: [
+        //         {
+        //           name: 'company',
+        //           label: 'Empresa',
+        //           type: 'text',
+        //         },
+        //         {
+        //           name: 'position',
+        //           label: 'Cargo',
+        //           type: 'text',
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       name: 'hobbies',
+        //       label: 'Hobbies',
+        //       type: 'array',
+        //       fields: [
+        //         {
+        //           name: 'hobby',
+        //           label: 'Hobby',
+        //           type: 'text',
+        //         },
+        //         {
+        //           name: 'frequency',
+        //           label: 'Frequência',
+        //           type: 'select',
+        //           options: [
+        //             { label: 'Diário', value: 'daily' },
+        //             { label: 'Semanal', value: 'weekly' },
+        //             { label: 'Mensal', value: 'monthly' },
+        //           ],
+        //         },
+        //       ],
+        //     },
+        //   ],
+        // },
       ],
     },
   ],
 };
 
-const schema: FormSchema = {
+export const schema: FormSchema = {
   title: 'Cadastro Familiar',
   fields: [
     {
@@ -550,125 +515,3 @@ const schema: FormSchema = {
     },
   ],
 };
-
-const schemaTest: FormSchema = {
-  title: 'Teste',
-  fields: [
-    {
-      name: 'alergias',
-      label: 'Alergias',
-      type: 'json',
-      options: [],
-      value: '',
-      fields: [
-        {
-          name: 'tipo',
-          label: 'Tipo',
-          type: 'radio',
-          options: [
-            {
-              value: 'alimento',
-              label: 'Alimento',
-            },
-            {
-              value: 'medicamento',
-              label: 'Medicamento',
-            },
-          ],
-          value: '',
-          fields: [],
-        },
-        {
-          name: 'alimento',
-          label: 'Alimento',
-          type: 'text',
-          options: [],
-          conditional: {
-            field: 'tipo',
-            value: 'alimento',
-          },
-          value: '',
-          fields: [],
-        },
-        {
-          name: 'medicamento',
-          label: 'Medicamento',
-          type: 'text',
-          options: [],
-          conditional: {
-            field: 'tipo',
-            value: 'medicamento',
-          },
-          value: '',
-          fields: [],
-        },
-      ],
-    },
-  ],
-};
-
-@Component({
-  selector: 'app-custom-form',
-  templateUrl: './custom-form.component.html',
-  styleUrls: ['./custom-form.component.scss'],
-})
-export class CustomFormComponent implements OnInit {
-  @Input() schema: FormSchema = advancedSchema;
-  // @Input() schema: FormSchema = schemaFormFields;
-  form!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.form = this.createFormGroup(this.schema.fields);
-    this.setupConditionalFields();
-    this.form.valueChanges.subscribe(() => {
-      console.log('Form Data:', JSON.stringify(this.form.value, null, 2));
-    });
-  }
-
-  setupConditionalFields(): void {
-    this.schema.fields.forEach((field) => {
-      if (field.conditional) {
-        this.form.get(field.conditional.field)?.valueChanges.subscribe(() => {
-          this.form.updateValueAndValidity();
-        });
-      }
-    });
-  }
-
-  createFormGroup(fields: FormField[]): FormGroup {
-    const group: { [key: string]: AbstractControl } = {};
-
-    fields.forEach((field) => {
-      if (field.type === 'json') {
-        group[field.name] = this.createFormGroup(field.fields || []);
-      } else if (field.type === 'array') {
-        // Criando um FormArray
-        const formArray = this.fb.array([]);
-
-        // Criando um FormArray com um valor inicial preenchido
-        // const formArray = this.fb.array([
-        //   this.createFormGroup(field.fields || [])
-        // ]);
-
-        group[field.name] = formArray;
-      } else {
-        group[field.name] = this.fb.control(
-          field.value || '',
-          this.getValidators(field.validations)
-        );
-      }
-    });
-
-    return this.fb.group(group);
-  }
-
-  getValidators(validations: any) {
-    const validators = [];
-    if (validations?.required) {
-      validators.push(Validators.required);
-    }
-    return validators;
-  }
-}

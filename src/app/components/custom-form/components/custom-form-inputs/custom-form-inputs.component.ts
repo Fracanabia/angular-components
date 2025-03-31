@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormField } from '../custom-form.component';
+import { FormField } from '../../custom-form.component';
 
 @Component({
   selector: 'app-custom-form-inputs',
@@ -10,11 +10,20 @@ import { FormField } from '../custom-form.component';
 export class CustomFormInputsComponent {
   @Input() field!: FormField;
   @Input() formGroup!: FormGroup;
+  @Input() rootFormGroup!: FormGroup;
+  @Input() isRecursive = false;
 
   isFieldVisible(field: FormField): boolean {
-    if (!field.conditional || !field.conditional.field || !field.conditional.value) return true;
+    if (
+      !field.conditional ||
+      !field.conditional.field ||
+      !field.conditional.value
+    )
+      return true;
 
-    const control = this.formGroup.get(field.conditional.field);
+    const control =
+      this.formGroup.get(field.conditional.field) ||
+      this.rootFormGroup.get(field.conditional.field);
     if (!control) return false;
 
     const selectedValue = control.value;
@@ -30,23 +39,22 @@ export class CustomFormInputsComponent {
         default:
           return false;
       }
-    } else {
-      switch (operator) {
-        case '===':
-          return selectedValue === expectedValue;
-        case '!==':
-          return selectedValue !== expectedValue;
-        case '>':
-          return selectedValue > expectedValue;
-        case '<':
-          return selectedValue < expectedValue;
-        case '>=':
-          return selectedValue >= expectedValue;
-        case '<=':
-          return selectedValue <= expectedValue;
-        default:
-          return true;
-      }
+    }
+    switch (operator) {
+      case '===':
+        return selectedValue === expectedValue;
+      case '!==':
+        return selectedValue !== expectedValue;
+      case '>':
+        return selectedValue > expectedValue;
+      case '<':
+        return selectedValue < expectedValue;
+      case '>=':
+        return selectedValue >= expectedValue;
+      case '<=':
+        return selectedValue <= expectedValue;
+      default:
+        return true;
     }
   }
 }

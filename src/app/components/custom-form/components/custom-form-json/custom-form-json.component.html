@@ -4,6 +4,7 @@
       <app-custom-form-inputs
         [field]="nestedField"
         [formGroup]="getFormGroup(formGroup, field.name)"
+        [rootFormGroup]="formGroup"
       ></app-custom-form-inputs>
     </ng-container>
   </div>

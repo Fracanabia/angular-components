@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormField } from '../custom-form.component';
+import { FormField } from '../../custom-form.component';
 
 @Component({
   selector: 'app-custom-form-json',
