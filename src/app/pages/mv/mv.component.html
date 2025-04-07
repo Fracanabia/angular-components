@@ -1,0 +1,13 @@
+<mat-form-field style="width: 300px;">
+  <mat-label>Pesquisar Perfil</mat-label>
+  <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
+    <mat-option *ngFor="let profile of profiles" [value]="profile">
+      {{ profile.profileName }}
+    </mat-option>
+    <div #infiniteScroll></div>
+    <mat-option *ngIf="isLoading" disabled>
+      <mat-progress-spinner mode="indeterminate" diameter="20"></mat-progress-spinner>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

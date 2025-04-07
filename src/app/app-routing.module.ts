@@ -15,6 +15,7 @@ export const routes: Routes = [
  { path: 'number-currency', loadChildren: () => import('./pages/number-currency/number-currency.module').then(m => m.NumberCurrencyModule) },
  { path: 'ng-container', loadChildren: () => import('./pages/ng-container/ng-container.module').then(m => m.NgContainerModule) },
  { path: 'rxjs-observable',loadChildren: () => import('./pages/rxjs-observable/rxjs-observable.module').then((m) => m.RxjsObservableModule ) },
+ { path: 'rxjs-questions',loadChildren: () => import('./pages/rxjs-questions/rxjs-questions.module').then((m) => m.RxjsQuestionsModule ) },
  { path: 'scroll-with-flex', loadChildren: () => import('./pages/scroll-with-flex/scroll-with-flex.module').then(m => m.ScrollWithFlexModule) },
  { path: 'select', loadChildren: () => import('./pages/select/select.module').then(m => m.SelectModule) },
  { path: 'inpatient-list', loadChildren: () => import('./pages/inpatient-list/inpatient-list.module').then(m => m.InpatientListModule) },
@@ -23,6 +24,7 @@ export const routes: Routes = [
  { path: 'ia', loadChildren: () => import('./pages/ia/ia.module').then(m => m.IaModule) },
  { path: 'mavi', loadChildren: () => import('./pages/mavi/mavi.module').then(m => m.MaviModule) },
 { path: 'create-fields', loadChildren: () => import('./pages/create-fields/create-fields.module').then(m => m.CreateFieldsModule) },
+{ path: 'mv', loadChildren: () => import('./pages/mv/mv.module').then(m => m.MvModule) },
 ];
 
 @NgModule({
