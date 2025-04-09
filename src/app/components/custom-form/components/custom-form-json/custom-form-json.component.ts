@@ -12,7 +12,7 @@ export class CustomFormJsonComponent {
   @Input() formGroup!: FormGroup;
 
 
-  getFormGroup(form: any, fieldName: string): FormGroup {
+  getFormGroup(form: FormGroup, fieldName: string): FormGroup {
     return form.get(fieldName) as FormGroup;
   }
 }

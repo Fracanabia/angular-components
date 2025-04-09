@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  ValidationErrors,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
 export interface FormSchema {
   title: string;
+  rules?: string[];
   fields: FormField[];
 }
 
@@ -18,6 +19,7 @@ export interface FormField {
   type: 'text' | 'number' | 'select' | 'radio' | 'checkbox' | 'json' | 'array';
   options?: { label: string; value: any }[];
   fields?: FormField[];
+  rules?: string[];
   validations?: {
     readonly?: boolean | '';
     required?: boolean | '';
@@ -39,20 +41,23 @@ export interface FormField {
   templateUrl: './custom-form.component.html',
   styleUrls: ['./custom-form.component.scss'],
 })
-export class CustomFormComponent implements OnInit {
+export class CustomFormComponent implements OnInit, OnDestroy {
   @Input() schema!: FormSchema;
   @Input() isRecursive = false;
   @Input() debug = true;
+  @Output() formValue = new EventEmitter()
   formGroup!: FormGroup;
+  destroyed = new Subject<void>();
+
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.schema) {
       this.formGroup = this.createFormGroup(this.schema.fields);
-      this.formGroup.valueChanges.subscribe(() => {
-        // console.log(this.formGroup);
-      });
+      this.formGroup.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((formValue) => {
+        this.formValue.emit(formValue)
+      })
     } else {
       throw new Error('Schema is required to initialize the form.');
     }
@@ -61,7 +66,7 @@ export class CustomFormComponent implements OnInit {
   sanitizeObject(obj: any): any {
     if (Array.isArray(obj)) {
       const sanitizedArray = obj
-        .map(this.sanitizeObject.bind(this))
+        .map((item) => this.sanitizeObject(item))
         .filter((item) => item !== undefined);
       return sanitizedArray.length > 0 ? sanitizedArray : undefined;
     }
@@ -138,5 +143,10 @@ export class CustomFormComponent implements OnInit {
     }
 
     return validators;
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 }

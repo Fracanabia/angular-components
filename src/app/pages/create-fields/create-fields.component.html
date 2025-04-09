@@ -1,6 +1,25 @@
-<!-- <div style="display: flex; justify-content: space-between">
-  <app-custom-form style="flex: 1" [schema]="schemaBase" [isRecursive]="true"></app-custom-form>
-</div> -->
+<div class="text-voice">
+  <h2>Transcrição com voz IA</h2>
+
+  <div class="trasncription">
+    <app-native-record
+      (recognizedTextEmitter)="userInput = $event"
+    ></app-native-record>
+    <!-- Input para enviar mensagens -->
+    <div class="input-container">
+      <input
+        type="text"
+        [(ngModel)]="userInput"
+        placeholder="Digite sua mensagem..."
+        (keyup.enter)="enviarMensagem()"
+      />
+      <button (click)="enviarMensagem()" [disabled]="carregando">
+        Enviar
+      </button>
+    </div>
+    <p *ngIf="carregando" class="loading">Carregando resposta...</p>
+  </div>
+</div>
 
 <mat-accordion>
   <ng-container *ngFor="let schema of schemas">
@@ -16,4 +35,5 @@
     </mat-expansion-panel>
   </ng-container>
 </mat-accordion>
+
 

@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MvComponent } from './mv.component';
 import { MvRoutingModule } from './mv.routing.module';
+import { CustomFormModule } from '../../components/custom-form/custom-form.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { MvRoutingModule } from './mv.routing.module';
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    CustomFormModule
   ],
   declarations: [MvComponent],
 })

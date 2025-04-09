@@ -138,21 +138,28 @@ export const advancedSchema: FormSchema = {
           type: 'array',
           fields: [
             {
-              name: 'type',
-              label: 'Tipo',
-              type: 'select',
-              options: [
-                { label: 'Celular', value: 'mobile' },
-                { label: 'Residencial', value: 'home' },
-                { label: 'Trabalho', value: 'work' },
+              name: 'phone',
+              label: 'Telefone',
+              type: 'json',
+              fields: [
+                {
+                  name: 'type',
+                  label: 'Tipo',
+                  type: 'select',
+                  options: [
+                    { label: 'Celular', value: 'mobile' },
+                    { label: 'Residencial', value: 'home' },
+                    { label: 'Trabalho', value: 'work' },
+                  ],
+                  validations: { required: true },
+                },
+                {
+                  name: 'number',
+                  label: 'Número',
+                  type: 'text',
+                  validations: { required: true, pattern: '^[0-9]+$' },
+                },
               ],
-              validations: { required: true },
-            },
-            {
-              name: 'number',
-              label: 'Número',
-              type: 'text',
-              validations: { required: true, pattern: '^[0-9]+$' },
             },
           ],
         },
@@ -225,65 +232,78 @@ export const advancedSchema: FormSchema = {
       type: 'array',
       fields: [
         {
-          name: 'name',
-          label: 'Nome',
-          type: 'text',
-          validations: { required: true },
-        },
-        {
-          name: 'relationship',
-          label: 'Parentesco',
-          type: 'select',
-          options: [
-            { label: 'Pai', value: 'father' },
-            { label: 'Mãe', value: 'mother' },
-            { label: 'Irmão(ã)', value: 'sibling' },
-            { label: 'Filho(a)', value: 'child' },
-            { label: 'Outro', value: 'other' },
-          ],
-          validations: { required: true },
-        },
-
-        {
-          name: 'additionalInfo',
-          label: 'Informações Adicionais',
+          name: 'familyMember',
+          label: 'Membro da Família',
           type: 'json',
           fields: [
             {
-              name: 'job',
-              label: 'Trabalho',
+              name: 'name',
+              label: 'Nome',
+              type: 'text',
+              validations: { required: true },
+            },
+            {
+              name: 'relationship',
+              label: 'Parentesco',
+              type: 'select',
+              options: [
+                { label: 'Pai', value: 'father' },
+                { label: 'Mãe', value: 'mother' },
+                { label: 'Irmão(ã)', value: 'sibling' },
+                { label: 'Filho(a)', value: 'child' },
+                { label: 'Outro', value: 'other' },
+              ],
+              validations: { required: true },
+            },
+            {
+              name: 'additionalInfo',
+              label: 'Informações Adicionais',
               type: 'json',
               fields: [
                 {
-                  name: 'company',
-                  label: 'Empresa',
-                  type: 'text',
+                  name: 'job',
+                  label: 'Trabalho',
+                  type: 'json',
+                  fields: [
+                    {
+                      name: 'company',
+                      label: 'Empresa',
+                      type: 'text',
+                    },
+                    {
+                      name: 'position',
+                      label: 'Cargo',
+                      type: 'text',
+                    },
+                  ],
                 },
                 {
-                  name: 'position',
-                  label: 'Cargo',
-                  type: 'text',
-                },
-              ],
-            },
-            {
-              name: 'hobbies',
-              label: 'Hobbies',
-              type: 'array',
-              fields: [
-                {
-                  name: 'hobby',
-                  label: 'Hobby',
-                  type: 'text',
-                },
-                {
-                  name: 'frequency',
-                  label: 'Frequência',
-                  type: 'select',
-                  options: [
-                    { label: 'Diário', value: 'daily' },
-                    { label: 'Semanal', value: 'weekly' },
-                    { label: 'Mensal', value: 'monthly' },
+                  name: 'hobbies',
+                  label: 'Hobbies',
+                  type: 'array',
+                  fields: [
+                    {
+                      name: 'hobby',
+                      label: 'Hobby',
+                      type: 'json',
+                      fields: [
+                        {
+                          name: 'hobby',
+                          label: 'Hobby',
+                          type: 'text',
+                        },
+                        {
+                          name: 'frequency',
+                          label: 'Frequência',
+                          type: 'select',
+                          options: [
+                            { label: 'Diário', value: 'daily' },
+                            { label: 'Semanal', value: 'weekly' },
+                            { label: 'Mensal', value: 'monthly' },
+                          ],
+                        },
+                      ]
+                    }
                   ],
                 },
               ],

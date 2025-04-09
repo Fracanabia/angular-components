@@ -25,15 +25,15 @@ export class CustomFormArrayComponent {
     return form.get(fieldName) as FormArray;
   }
 
-  getFormGroup(control: any): FormGroup {
+  getFormGroup(control: AbstractControl): FormGroup {
     return control as FormGroup;
   }
 
-  createFormGroup(fields: FormField[]): FormGroup {
+  createFormGroup(fields: FormField[], newItem = false): FormGroup {
     const group = this.fb.group({}); // Inicializa o FormGroup vazio
 
     fields.forEach((field) => {
-      const initialValue = field.value || '';
+      const initialValue = !newItem && field.value || '';
       if (field.conditional) {
         group.get(field.conditional.field)?.valueChanges.subscribe(() => {
           group.updateValueAndValidity();
@@ -41,7 +41,7 @@ export class CustomFormArrayComponent {
       }
       // Para campos tipo 'json', criamos um grupo aninhado
       if (field.type === 'json' && field.fields?.length) {
-        group.addControl(field.name, this.createFormGroup(field.fields)); // Recursão para campos JSON
+        group.addControl(field.name, this.createFormGroup(field.fields,newItem)); // Recursão para campos JSON
       }
       // Para campos do tipo 'array', criamos um FormArray
       else if (field.type === 'array' && field.fields?.length) {
@@ -50,7 +50,7 @@ export class CustomFormArrayComponent {
           group.addControl(field.name, formArray); // Adiciona o FormArray
         } else {
           const formArray = this.fb.array(
-            field.fields?.map((field) => this.createFormGroup([field])) || []
+            field.fields?.map((field) => this.createFormGroup([field], newItem)) || []
           );
           group.addControl(field.name, formArray); // Adiciona o FormArray
         }
@@ -92,11 +92,11 @@ export class CustomFormArrayComponent {
   addItem(): void {
     if (this.isRecursive) {
       const formArray = this.getFormArray(this.formGroup, this.field.name);
-      const newItemGroup = this.createFormGroup(this.field.fields || []);
+      const newItemGroup = this.createFormGroup(this.field.fields || [], true);
       formArray.push(newItemGroup);
     } else if (this.field.fields && this.field.fields.length) {
       const formArray = this.getFormArray(this.formGroup, this.field.name);
-      const newItemGroup = this.createFormGroup([this.field.fields[0]]);
+      const newItemGroup = this.createFormGroup([this.field.fields[0]], true);
       formArray.push(newItemGroup);
     }
   }
