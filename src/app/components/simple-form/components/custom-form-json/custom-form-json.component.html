@@ -1,0 +1,12 @@
+<form [formGroup]="formGroup">
+  <div [formGroupName]="field.name">
+    <ng-container *ngFor="let nestedField of field.fields">
+      <app-custom-form-inputs
+        [field]="nestedField"
+        [formGroup]="getFormGroup(formGroup, field.name)"
+        [rootFormGroup]="formGroup"
+      ></app-custom-form-inputs>
+    </ng-container>
+  </div>
+
+</form>

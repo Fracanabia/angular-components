@@ -1,0 +1,33 @@
+<form [formGroup]="formGroup">
+  <fieldset style="border: 1px solid">
+    <legend>{{ field.label }}</legend>
+
+    <div [formArrayName]="field.name">
+      <div
+        *ngFor="let control of getFormArray().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div style="display: flex; justify-content: end">
+          <button style="margin: 8px 0" type="button" (click)="removeItem(i)">
+            Remover
+          </button>
+        </div>
+
+        <ng-container *ngFor="let child of field.fields">
+          <app-custom-form-inputs
+            [field]="child"
+            [formGroup]="getFormGroup(control)"
+            [rootFormGroup]="formGroup"
+          >
+          </app-custom-form-inputs>
+        </ng-container>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: end">
+      <button style="margin: 8px 0" type="button" (click)="addItem()">
+        Adicionar {{ field.label }}
+      </button>
+    </div>
+  </fieldset>
+</form>

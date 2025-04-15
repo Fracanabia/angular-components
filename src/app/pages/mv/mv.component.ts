@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { FormField } from '../../components/custom-form/custom-form.component';
-import { schemaBase } from './../../components/custom-form/utils/base';
+import { base } from '../../components/simple-form/simple-form.service';
 import { Module, MvService, Profile } from './mv.service';
 
 @Component({
@@ -20,7 +20,7 @@ import { Module, MvService, Profile } from './mv.service';
 export class MvComponent implements OnInit, AfterViewInit {
   profileSearchControl = new FormControl('');
   moduleSearchControl = new FormControl('');
-  schemaBase = schemaBase;
+  schemaBase = base;
   profiles: Profile[] = [];
   profile: Profile | null = null;
   modules: Module[] = [];

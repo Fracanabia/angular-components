@@ -132,7 +132,7 @@ baseFields.push({
   label: 'JSON',
   type: 'array',
   conditional: { field: 'type', value: 'json' },
-  fields: baseFields,
+  fields: [],
 });
 
 baseFields.push({
@@ -140,7 +140,7 @@ baseFields.push({
   label: 'ARRAY',
   type: 'array',
   conditional: { field: 'type', value: 'array' },
-  fields: baseFields,
+  fields: [],
 });
 
 schemaBase.fields = baseFields;

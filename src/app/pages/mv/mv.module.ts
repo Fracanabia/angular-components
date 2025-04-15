@@ -6,11 +6,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleFormModule } from '../../components/simple-form/simple-form.module';
 import { MvComponent } from './mv.component';
 import { MvRoutingModule } from './mv.routing.module';
-import { CustomFormModule } from '../../components/custom-form/custom-form.module';
 
 @NgModule({
   imports: [
@@ -23,7 +21,7 @@ import { CustomFormModule } from '../../components/custom-form/custom-form.modul
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    CustomFormModule
+    SimpleFormModule,
   ],
   declarations: [MvComponent],
 })

@@ -1,105 +1,26 @@
-<form (ngSubmit)="submit()">
-  <ng-container *ngFor="let field of schema.fields">
-    <ng-container
-      [ngTemplateOutlet]="renderField"
-      [ngTemplateOutletContext]="{
-        field: field,
-        fields: schema.fields
-      }"
-    ></ng-container>
-  </ng-container>
-  <button type="submit">Salvar</button>
-</form>
-
-<!-- Template recursivo -->
-<ng-template
-  #renderField
-  let-field="field"
-  let-fields="fields"
->
-  <div style="margin-left: 16px; margin-bottom: 12px" *ngIf="shouldShowField(field, fields)">
-    <!-- Campo de texto -->
-    <ng-container *ngIf="field.type === 'text'">
-      <label>{{ field.label }}:</label>
-      <input type="text" [(ngModel)]="field.value" [name]="field.name" />
-    </ng-container>
-
-    <!-- Campo de checkbox -->
-    <ng-container *ngIf="field.type === 'checkbox'">
-      <label>
-        <input type="checkbox" [(ngModel)]="field.value" [name]="field.name" />
-        {{ field.label }}
-      </label>
-    </ng-container>
-
-    <div
-      *ngIf="field.type === 'select'"
-      style="margin-bottom: 8px; display: flex; flex-direction: column"
-    >
-      <label>{{ field.label }}</label>
-      <select [(ngModel)]="field.value">
-        <option value="" disabled selected hidden>Selecione uma opção</option>
-        <option *ngFor="let option of field.options" [value]="option.value">
-          {{ option.label }}
-        </option>
-      </select>
-    </div>
-
-    <div
-      *ngIf="field.type === 'radio'"
-      style="margin-bottom: 8px; display: flex; flex-direction: column"
-    >
-      <label>{{ field.label }}</label>
-      <div *ngFor="let option of field.options">
-        <input type="radio" [(ngModel)]="field.value" [value]="option.value" />
-        {{ option.label }}
+<div style="display: flex; gap: 8px; height: 100%;" >
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+    <div style="overflow: hidden; display: flex; flex-direction: column;">
+      <div style="flex: 1; overflow: auto; background: #e9e9e9; padding: 8px;">
+        <form *ngIf="schema.length && formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+          <div *ngFor="let field of schema">
+            <app-custom-form-inputs [field]="field" [formGroup]="formGroup" [rootFormGroup]="formGroup"></app-custom-form-inputs>
+          </div>
+        </form>
       </div>
     </div>
-
-    <!-- Campo objeto (subcampos) -->
-    <ng-container *ngIf="field.type === 'object'">
-      <fieldset>
-        <legend>{{ field.label }}</legend>
-        <ng-container *ngFor="let subField of field.fields">
-          <ng-container
-            [ngTemplateOutlet]="renderField"
-            [ngTemplateOutletContext]="{
-              field: subField,
-              fields: field.fields
-            }"
-          ></ng-container>
-        </ng-container>
-      </fieldset>
-    </ng-container>
-
-    <!-- Campo array (lista de objetos) -->
-    <ng-container *ngIf="field.type === 'array'">
-      <fieldset>
-        <legend>{{ field.label }}</legend>
-        <div>
-          <div
-            *ngFor="let subField of field.fields"
-            style="border: 1px dashed #ccc; padding: 8px; margin-top: 8px"
-          >
-            <ng-container
-              [ngTemplateOutlet]="renderField"
-              [ngTemplateOutletContext]="{
-                field: subField,
-                fields: field.fields
-              }"
-            ></ng-container>
-          </div>
-          <!-- Adicionar um novo item -->
-          <button type="button" (click)="addItem(field)">Adicionar</button>
-          <button
-            type="button"
-            [disabled]="fields?.length <= 1"
-            (click)="removeItem(field)"
-          >
-            Remover {{ field.label }}
-          </button>
-        </div>
-      </fieldset>
-    </ng-container>
   </div>
-</ng-template>
+
+  <!-- Debugg -->
+  <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+      <div style="overflow: hidden; display: flex; flex-direction: column; gap: 8px;">
+        schema
+        <textarea rows="18" style="flex: 1; margin: 0; overflow: auto; background: #e9e9e9; padding: 8px; font-size: 10px;" [value]="schema | json"></textarea>
+        formGroup.value - {{formGroup.valid}}
+        <textarea rows="18" style="flex: 1; margin: 0; overflow: auto; background: #e9e9e9; padding: 8px; font-size: 10px;" [value]="formGroup.value | json "></textarea>
+        sanitizeObject(formGroup.value)
+        <textarea rows="18" style="flex: 1; margin: 0; overflow: auto; background: #e9e9e9; padding: 8px; font-size: 10px;" [value]="sanitizeObject(formGroup.value) | json"></textarea>
+      </div>
+  </div>
+</div>
+

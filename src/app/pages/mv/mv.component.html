@@ -29,8 +29,8 @@
       <button (click)="resetSchema()">Redefinir</button>
     </div>
     <fieldset>
-      <legend>{{schemaBase.title}}</legend>
-      <app-custom-form *ngIf="show" [schema]="schemaBase" [isRecursive]="true" [debug]="true" (formValue)="formValue($event)"></app-custom-form>
+      <legend>{{module.moduleName}}</legend>
+      <app-simple-form *ngIf="show" [schema]="schemaBase"></app-simple-form>
     </fieldset>
   </ng-container>
 </div>
