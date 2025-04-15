@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class IaService {
   private apiUrl = 'https://openrouter.ai/api/v1/chat/completions'; // Endpoint do OpenRouter
   private apiKey = environment.iaKey; // 🚨 Sua API Key do OpenRouter
+  private iaModel = environment.iaModel; // 🚨 Sua API Key do OpenRouter
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +31,7 @@ export class IaService {
     `;
 
     const body = {
-      model: 'meta-llama/llama-4-maverick:free',
+      model: this.iaModel,
       messages: [
         {
           role: 'system',

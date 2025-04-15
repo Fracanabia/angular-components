@@ -9,7 +9,7 @@ import {
 } from '../../components/custom-form/utils/base';
 import {
   advancedSchema,
-  complexSchema
+  complexSchema,
 } from '../../components/custom-form/utils/examples';
 
 interface Schemas {
@@ -26,10 +26,249 @@ interface Schemas {
 export class CreateFieldsComponent {
   public schemas: Schemas[] = [
     // { schema: schemaBase, isRecursive: true, debug: true },
-    // { schema: schemaAlergias, isRecursive: false, debug: true },
+    { schema: formToProcess, isRecursive: false, debug: true },
     // { schema: schemaMedicamentos, isRecursive: false, debug: true },
     // { schema: complexSchema, isRecursive: false, debug: false },
-    // { schema: advancedSchema, isRecursive: false, debug: false },
+    { schema: advancedSchema, isRecursive: false, debug: false },
+    {
+      schema: {
+        "title": "Alergias",
+        "rules": [
+          "Não inclua texto adicional, mantenha a mesma estrutura fornecida, apenas o JSON formatado corretamente",
+          "Deve respeitar as regras definidas em rules no schema."
+        ],
+        "fields": [
+          {
+            "name": "alergias",
+            "label": "alergias",
+            "type": "array",
+            "rules": [
+              "Fields: Caso sejam encontrados múltiplos itens, deve ser gerado um campo correspondente para cada um."
+            ],
+            "fields": [
+              {
+                "name": "alergia",
+                "label": "alergia",
+                "type": "json",
+                "fields": [
+                  {
+                    "name": "tipo",
+                    "label": "Tipo",
+                    "type": "radio",
+                    "options": [
+                      {
+                        "value": "alimento",
+                        "label": "alimento"
+                      },
+                      {
+                        "value": "medicamento",
+                        "label": "medicamento"
+                      },
+                      {
+                        "value": "outro",
+                        "label": "outro"
+                      }
+                    ],
+                    "value": "alimento"
+                  },
+                  {
+                    "name": "alimento",
+                    "label": "alimento",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "alimento",
+                      "operator": "==="
+                    },
+                    "rules": [
+                      "Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo \"value\"."
+                    ],
+                    "value": "camarão"
+                  },
+                  {
+                    "name": "medicamento",
+                    "label": "medicamento",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "medicamento",
+                      "operator": "==="
+                    },
+                    "rules": [
+                      "Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo \"value\"."
+                    ],
+                    "value": ""
+                  },
+                  {
+                    "name": "outro",
+                    "label": "Outro",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "outro",
+                      "operator": "==="
+                    },
+                    "value": ""
+                  },
+                  {
+                    "name": "descricao",
+                    "label": "Descrição",
+                    "type": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "name": "alergia",
+                "label": "alergia",
+                "type": "json",
+                "fields": [
+                  {
+                    "name": "tipo",
+                    "label": "Tipo",
+                    "type": "radio",
+                    "options": [
+                      {
+                        "value": "alimento",
+                        "label": "alimento"
+                      },
+                      {
+                        "value": "medicamento",
+                        "label": "medicamento"
+                      },
+                      {
+                        "value": "outro",
+                        "label": "outro"
+                      }
+                    ],
+                    "value": "outro"
+                  },
+                  {
+                    "name": "alimento",
+                    "label": "alimento",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "alimento",
+                      "operator": "==="
+                    },
+                    "rules": [
+                      "Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo \"value\"."
+                    ],
+                    "value": ""
+                  },
+                  {
+                    "name": "medicamento",
+                    "label": "medicamento",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "medicamento",
+                      "operator": "==="
+                    },
+                    "rules": [
+                      "Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo \"value\"."
+                    ],
+                    "value": ""
+                  },
+                  {
+                    "name": "outro",
+                    "label": "Outro",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "outro",
+                      "operator": "==="
+                    },
+                    "value": "pelo de gato"
+                  },
+                  {
+                    "name": "descricao",
+                    "label": "Descrição",
+                    "type": "text",
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "name": "alergia",
+                "label": "alergia",
+                "type": "json",
+                "fields": [
+                  {
+                    "name": "tipo",
+                    "label": "Tipo",
+                    "type": "radio",
+                    "options": [
+                      {
+                        "value": "alimento",
+                        "label": "alimento"
+                      },
+                      {
+                        "value": "medicamento",
+                        "label": "medicamento"
+                      },
+                      {
+                        "value": "outro",
+                        "label": "outro"
+                      }
+                    ],
+                    "value": "medicamento"
+                  },
+                  {
+                    "name": "alimento",
+                    "label": "alimento",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "alimento",
+                      "operator": "==="
+                    },
+                    "rules": [
+                      "Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo \"value\"."
+                    ],
+                    "value": ""
+                  },
+                  {
+                    "name": "medicamento",
+                    "label": "medicamento",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "medicamento",
+                      "operator": "==="
+                    },
+                    "rules": [
+                      "Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo \"value\"."
+                    ],
+                    "value": "dipirona"
+                  },
+                  {
+                    "name": "outro",
+                    "label": "Outro",
+                    "type": "text",
+                    "conditional": {
+                      "field": "tipo",
+                      "value": "outro",
+                      "operator": "==="
+                    },
+                    "value": ""
+                  },
+                  {
+                    "name": "descricao",
+                    "label": "Descrição",
+                    "type": "text",
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      isRecursive: false,
+      debug: false,
+    },
   ];
 
   constructor(private readonly iaService: IaService) {}

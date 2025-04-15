@@ -5,7 +5,7 @@ export const schemaBase: FormSchema = {
   fields: [],
 };
 
-const baseFields: FormField[] = [
+export const baseFields: FormField[] = [
   {
     name: 'name',
     label: 'Nome do Campo',
@@ -362,33 +362,29 @@ export const formToProcess1: FormSchema = {
             {
               name: 'alimento',
               label: 'alimento',
-              type: 'select',
+              type: 'text',
               conditional: {
                 field: 'tipo',
                 value: 'alimento',
                 operator: '===',
               },
               rules: [
-                'Options: Consultar a API para obter os itens disponíveis e preencher o campo "options".',
                 'Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo "value".',
               ],
-              options: [{ value: '', label: 'Não informado' }],
               value: '',
             },
             {
               name: 'medicamento',
               label: 'medicamento',
-              type: 'select',
+              type: 'text',
               conditional: {
                 field: 'tipo',
                 value: 'medicamento',
                 operator: '===',
               },
               rules: [
-                'Options: Consultar a API para obter os itens disponíveis e preencher o campo "options".',
                 'Value: Identificar o valor selecionado pelo usuário e preencher corretamente o campo "value".',
               ],
-              options: [{ value: '', label: 'Não informado' }],
               value: '',
             },
             {
@@ -396,7 +392,7 @@ export const formToProcess1: FormSchema = {
               label: 'Outro',
               type: 'text',
               conditional: { field: 'tipo', value: 'outro', operator: '===' },
-              value: 'outro',
+              value: '',
             },
             {
               name: 'descricao',

@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  iaKey: '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'
+  iaKey: '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',
+  iaModel: 'moonshotai/kimi-vl-a3b-thinking:free'
 };
